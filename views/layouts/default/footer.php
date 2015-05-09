@@ -1,7 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: garbuche
- * Date: 5/9/2015
- * Time: 7:10 PM
- */
+<footer>
+    (c) MVC Framework, 2015
+</footer>
+</body>
+
+</html>
