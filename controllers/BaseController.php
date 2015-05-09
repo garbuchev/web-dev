@@ -1,12 +1,18 @@
 <?php
 
 abstract class BaseController {
-    protected $action;
+    protected $actionName;
     protected $controllerName;
+    protected $isViewRendered = false;
 
     function __construct($controllerName, $action){
         $this->controllerName = $controllerName;
-        $this->action = $action;
+        $this->actionName = $action;
+        $this->onInit();
+    }
+
+    public function onInit(){
+        //implement initializing logic in the subclasses
     }
 
     public function index(){
@@ -14,11 +20,14 @@ abstract class BaseController {
     }
 
     public function renderView($viewName = null){
-        if ($viewName == null){
-            $viewName = $this->action;
-        }
+        if(!$this->isViewRendered) {
+            if ($viewName == null) {
+                $viewName = $this->actionName;
+            }
 
-        $viewFileName = 'views/'.$this->controllerName.'/'.$this->action.'.php';
-        include_once($viewFileName);
+            $viewFileName = 'views/' . $this->controllerName . '/' . $viewName . '.php';
+            include_once($viewFileName);
+            $this->isViewRendered = true;
+        }
     }
 }
